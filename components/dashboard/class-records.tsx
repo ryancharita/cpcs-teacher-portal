@@ -10,14 +10,15 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 
 interface ClassRecord {
   id: number;
-  classId: number;
-  subjectId: number;
+  classId: number | null;
+  subjectId: number | null;
   gradeLevelId: number | null;
-  q1: number | null;
-  q2: number | null;
-  q3: number | null;
-  q4: number | null;
-  average: number | null;
+  teacherId: number | null;
+  q1: string | null;
+  q2: string | null;
+  q3: string | null;
+  q4: string | null;
+  average: string | null;
   remarks: string | null;
 }
 
@@ -45,7 +46,7 @@ export default function ClassRecords() {
     setLoading(true);
     const result = await getGrades();
     if (result.success && result.data) {
-      setRecords(result.data);
+      setRecords(result.data as ClassRecord[]);
     }
     setLoading(false);
   };
@@ -220,14 +221,14 @@ export default function ClassRecords() {
             <TableBody>
               {records.map((record) => (
                 <TableRow key={record.id}>
-                  <TableCell>{record.classId}</TableCell>
-                  <TableCell>{record.subjectId}</TableCell>
+                  <TableCell>{record.classId ?? '-'}</TableCell>
+                  <TableCell>{record.subjectId ?? '-'}</TableCell>
                   <TableCell>{record.gradeLevelId ?? '-'}</TableCell>
-                  <TableCell>{record.q1 ?? '-'}</TableCell>
-                  <TableCell>{record.q2 ?? '-'}</TableCell>
-                  <TableCell>{record.q3 ?? '-'}</TableCell>
-                  <TableCell>{record.q4 ?? '-'}</TableCell>
-                  <TableCell className="font-medium">{record.average ?? '-'}</TableCell>
+                  <TableCell>{record.q1 ? parseFloat(record.q1).toFixed(2) : '-'}</TableCell>
+                  <TableCell>{record.q2 ? parseFloat(record.q2).toFixed(2) : '-'}</TableCell>
+                  <TableCell>{record.q3 ? parseFloat(record.q3).toFixed(2) : '-'}</TableCell>
+                  <TableCell>{record.q4 ? parseFloat(record.q4).toFixed(2) : '-'}</TableCell>
+                  <TableCell className="font-medium">{record.average ? parseFloat(record.average).toFixed(2) : '-'}</TableCell>
                   <TableCell>{record.remarks ?? '-'}</TableCell>
                 </TableRow>
               ))}

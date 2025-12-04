@@ -3,6 +3,7 @@
 import { db } from '@/db/index';
 import { grades } from '@/db/schema';
 import { auth } from '@clerk/nextjs/server';
+import type { InferInsertModel } from 'drizzle-orm';
 
 export async function getGrades() {
   try {
@@ -50,20 +51,22 @@ export async function createGrade(formData: {
       average = parseFloat((sum / quarters.length).toFixed(2));
     }
 
+    const insertData: InferInsertModel<typeof grades> = {
+      gradeLevelId: gradeLevelId || null,
+      subjectId,
+      classId,
+      teacherId: teacherId || null,
+      q1: q1 ? String(parseFloat(String(q1))) : null,
+      q2: q2 ? String(parseFloat(String(q2))) : null,
+      q3: q3 ? String(parseFloat(String(q3))) : null,
+      q4: q4 ? String(parseFloat(String(q4))) : null,
+      average: average ? String(average) : null,
+      remarks: remarks || null,
+    };
+
     const [newGrade] = await db
       .insert(grades)
-      .values({
-        classId,
-        subjectId,
-        teacherId: teacherId || null,
-        gradeLevelId: gradeLevelId || null,
-        q1: q1 ? parseFloat(String(q1)) : null,
-        q2: q2 ? parseFloat(String(q2)) : null,
-        q3: q3 ? parseFloat(String(q3)) : null,
-        q4: q4 ? parseFloat(String(q4)) : null,
-        average,
-        remarks: remarks || null,
-      })
+      .values(insertData)
       .returning();
 
     return { success: true, data: newGrade };
