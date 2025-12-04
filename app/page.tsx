@@ -1,6 +1,8 @@
+import Header from '@/components/layouts/header'
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative h-screen overflow-hidden">
+      <Header />
       {/* Blurred Background - Library/Classroom Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-teal-100 to-green-100">
         {/* Bookshelf Pattern */}
