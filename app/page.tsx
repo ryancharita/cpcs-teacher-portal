@@ -1,5 +1,20 @@
-import Header from '@/components/layouts/header'
+'use client';
+
+import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import Header from '@/components/layouts/header';
+
 export default function Home() {
+  const { isSignedIn, isLoaded } = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoaded && isSignedIn) {
+      router.push('/dashboard');
+    }
+  }, [isLoaded, isSignedIn, router]);
+
   return (
     <div className="relative h-screen overflow-hidden">
       <Header />
