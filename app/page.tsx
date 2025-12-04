@@ -57,7 +57,25 @@ export default function Home() {
           {/* Feature Boxes */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {/* Classes & Enrollment */}
-        ?
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex justify-center mb-4">
+                <div className="w-16 h-16 text-teal-500">
+                  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <line x1="8" y1="6" x2="18" y2="6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <line x1="8" y1="10" x2="18" y2="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <line x1="8" y1="14" x2="14" y2="14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-center text-gray-800 font-bold text-lg mb-2">
+                CLASSES & ENROLLMENT
+              </h3>
+              <p className="text-center text-gray-600 text-sm">
+                Organize coursework & student lists
+              </p>
+            </div>
 
             {/* Grades & Progress */}
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
